@@ -1,6 +1,7 @@
 ### creates a new patient entity
 Post http://localhost:4000/patients
 Content-Type: application/json
+
 {
 "name": "Ehsan Abid22",
 "email": "ehsan22@gmail.com",
