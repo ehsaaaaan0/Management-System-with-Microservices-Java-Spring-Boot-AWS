@@ -24,10 +24,10 @@ docker run -d --name analytics-service --network internal -p 4002:4002 -e SPRING
 
 //api gateway
 docker build -t api-gateway:latest -f api-gateway/Dockerfile api-gateway
-docker run -d --name api-gateway --network internal -p 4004:4004 api-gateway:latest
+docker run -d --name api-gateway --network internal -p 4004:4004 -e AUTH_SERVICE_URL=http://auth-service:4005 api-gateway:latest
 
 //create auth db image
 docker run -d --name auth-service-db --network internal -p 5001:5432 -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=password -e POSTGRES_DB=db -v C:\Users\EHSAAAAAN\Desktop\Files\db_volumes\auth-service-db:/var/lib/postgresql/data postgres:15
 //create auth server
 docker build -t auth-service:latest -f auth-service/Dockerfile auth-service
-docker run -d --name auth-service --network internal -e SPRING_DATASOURCE_URL=jdbc:postgresql://auth-service-db:5432/db -e SPRING_DATASOURCE_USERNAME=admin -e SPRING_DATASOURCE_PASSWORD=password -e SPRING_JPA_HIBERNATE_DDL_AUTO=update -e SPRING_SQL_INIT_MODE=always -e jwt.secret=your_secret_key auth-service:latest
+docker run -d --name auth-service --network internal -e SPRING_DATASOURCE_URL=jdbc:postgresql://auth-service-db:5432/db -e SPRING_DATASOURCE_USERNAME=admin -e SPRING_DATASOURCE_PASSWORD=password -e SPRING_JPA_HIBERNATE_DDL_AUTO=update -e SPRING_SQL_INIT_MODE=always -e jwt.secret=your_key auth-service:latest
