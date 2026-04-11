@@ -68,7 +68,7 @@ public class LocalStack extends Stack {
                         "auth-service",
                         List.of(4005),
                         authServiceDb,
-                        Map.of("JWT_SECRET", "Y2hhVEc3aHJnb0hYTzMyZ2ZqVkpiZ1RkZG93YWxrUkM="));
+                        Map.of("JWT_SECRET", "your_secret_key="));
 
         authService.getNode().addDependency(authDbHealthCheck);
         authService.getNode().addDependency(authServiceDb);
@@ -123,7 +123,7 @@ public class LocalStack extends Stack {
                 .vpc(vpc)
                 .instanceType(InstanceType.of(InstanceClass.BURSTABLE2, InstanceSize.MICRO))
                 .allocatedStorage(20)
-                .credentials(Credentials.fromGeneratedSecret("admin_user"))
+                .credentials(Credentials.fromGeneratedSecret("admin"))
                 .databaseName(dbName)
                 .removalPolicy(RemovalPolicy.DESTROY)
                 .build();
@@ -209,7 +209,7 @@ public class LocalStack extends Stack {
                     db.getDbInstanceEndpointPort(),
                     imageName
             ));
-            envVars.put("SPRING_DATASOURCE_USERNAME", "admin_user");
+            envVars.put("SPRING_DATASOURCE_USERNAME", "admin");
             envVars.put("SPRING_DATASOURCE_PASSWORD",
                     db.getSecret().secretValueFromJson("password").toString());
             envVars.put("SPRING_JPA_HIBERNATE_DDL_AUTO", "update");
