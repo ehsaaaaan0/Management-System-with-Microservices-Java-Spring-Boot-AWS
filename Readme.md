@@ -265,19 +265,4 @@ The project demonstrates:
 
 **Kafka issues**: Make sure the Kafka container is fully started before running producers/consumers. Check logs with `docker logs kafka`.
 
-## Next Steps
-
-Consider adding:
-- Docker Compose file to simplify startup
-- Health checks for all services
-- Monitoring with Prometheus and Grafana
-- Distributed tracing with Jaeger
-- Service mesh (Istio) for advanced traffic management
-
-## License
-
-MIT
-
----
-
 Built as a complete microservices learning project.
